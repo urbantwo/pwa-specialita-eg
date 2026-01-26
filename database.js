@@ -49,8 +49,6 @@ const database = {
       ],
       brevettiCollegati: ['amico-della-natura']
     },
-      brevettiCollegati: ['naturalista']
-    },
     {
       id: 'amico-quartiere',
       nome: 'Amico del quartiere',
