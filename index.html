@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">  <meta name="theme-color" content="#2C5530">
+  <meta name="description" content="Esplora tutte le Specialità e i Brevetti della Branca E/G AGESCI">
+  <title>Specialità EG - AGESCI</title>
+  
+  <!-- PWA Meta Tags -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon-192.svg">
+  <link rel="icon" type="image/svg+xml" href="icon-192.svg">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Splash Screen -->
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-logo">⭐</div>
+      <h1 class="splash-title">Specialità E/G</h1>
+      <p class="splash-subtitle">AGESCI</p>
+      <div class="splash-loader"></div>
+      <p class="splash-footer">Developed by Stefano Trevisi<br>Trepuzzi 1</p>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <h1>Specialità E/G</h1>
+    <p>Esplora e scopri le tue competenze</p>
+  </header>
+
+  <!-- Search Bar -->
+  <div class="search-container">
+    <input type="text" class="search-bar" placeholder="Cerca specialità o brevetto..." id="searchInput">
+  </div>
+
+  <!-- Main Content -->
+  <main class="content">
+    <div id="contentArea">
+      <!-- Le card verranno inserite qui via JavaScript -->
+    </div>
+  </main>
+
+  <!-- Detail View -->
+  <div class="detail-view" id="detailView">
+    <div class="detail-header">
+      <button class="back-btn" id="backBtn" aria-label="Torna indietro">←</button>
+      <div class="detail-title" id="detailTitle"></div>
+      <button class="detail-favorite-btn" id="detailFavoriteBtn" aria-label="Aggiungi ai preferiti">
+        ❤
+      </button>
+    </div>
+    <div class="detail-content" id="detailContent">
+      <!-- Il dettaglio verrà inserito qui via JavaScript -->
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav" id="bottomNav">
+    <button class="nav-item active" data-view="specialita" id="navSpecialita">
+      <span class="nav-icon">⭐</span>
+      <span class="nav-label">Specialità</span>
+    </button>
+    <button class="nav-item" data-view="brevetti" id="navBrevetti">
+      <span class="nav-icon">🏆</span>
+      <span class="nav-label">Brevetti</span>
+    </button>
+    <button class="nav-item" data-view="preferiti" id="navPreferiti">
+      <span class="nav-icon">❤</span>
+      <span class="nav-label">Preferiti</span>
+    </button>
+  </nav>
+
+  <!-- Install Prompt -->
+  <div class="install-prompt" id="installPrompt">
+    <div class="install-text">Installa l'app per un accesso rapido</div>
+    <button class="install-btn" id="installBtn">Installa</button>
+    <button class="close-install" id="closeInstallBtn">×</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="database.js"></script>
+  <script src="ui.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
