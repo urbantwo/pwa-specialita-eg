@@ -2,35 +2,24 @@
   "name": "Specialità EG AGESCI",
   "short_name": "Specialità EG",
   "description": "Esplora tutte le Specialità e i Brevetti della Branca E/G AGESCI",
-  "start_url": "/",
+  "start_url": "/pwa-specialita-eg/",
+  "scope": "/pwa-specialita-eg/",
   "display": "standalone",
   "background_color": "#E8DCC4",
   "theme_color": "#2C5530",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-192.svg",
+      "src": "/pwa-specialita-eg/icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     },
     {
-      "src": "icon-512.svg",
+      "src": "/pwa-specialita-eg/icon-512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "categories": ["education", "lifestyle"],

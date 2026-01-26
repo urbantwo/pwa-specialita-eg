@@ -1,14 +1,15 @@
 const CACHE_NAME = 'specialita-eg-v2';
+const BASE_PATH = '/pwa-specialita-eg';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/database.js',
-  '/ui.js',
-  '/app.js',
-  '/manifest.json',
-  '/icon-192.svg',
-  '/icon-512.svg'
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/styles.css`,
+  `${BASE_PATH}/database.js`,
+  `${BASE_PATH}/ui.js`,
+  `${BASE_PATH}/app.js`,
+  `${BASE_PATH}/manifest.json`,
+  `${BASE_PATH}/icon-192.svg`,
+  `${BASE_PATH}/icon-512.svg`
 ];
 
 // Install event
