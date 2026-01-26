@@ -5,7 +5,7 @@
  * i componenti dell'interfaccia utente
  */
 
-const UI = {
+window.UI = {
   /**
    * Renderizza una card per specialità o brevetto
    */

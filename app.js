@@ -5,7 +5,7 @@
  */
 
 // State Management
-const AppState = {
+window.AppState = {
   currentView: 'specialita',
   searchQuery: '',
   favorites: [],
@@ -49,7 +49,7 @@ const AppState = {
 };
 
 // Main App Object
-const App = {
+window.App = {
   /**
    * Inizializza l'applicazione
    */

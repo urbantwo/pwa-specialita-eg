@@ -5,7 +5,7 @@
  * della Branca Esploratori/Guide AGESCI
  */
 
-const database = {
+window.database = {
   specialita: [
     {
       id: 'allevatore',
