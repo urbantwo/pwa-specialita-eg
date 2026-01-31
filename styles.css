@@ -119,7 +119,9 @@ body {
   background: linear-gradient(135deg, var(--scout-beige) 0%, #f5ede0 100%);
   color: var(--text-dark);
   overflow-x: hidden;
-  padding-bottom: var(--bottom-nav-height);
+  padding-bottom: calc(var(--bottom-nav-height) + safe-area-inset-bottom);
+  padding-left: safe-area-inset-left;
+  padding-right: safe-area-inset-right;
   min-height: 100vh;
 }
 
@@ -127,7 +129,9 @@ body {
 .header {
   background: var(--scout-green);
   color: var(--text-light);
-  padding: 20px 20px 16px;
+  padding: max(20px, safe-area-inset-top) 20px 16px;
+  padding-left: max(20px, safe-area-inset-left);
+  padding-right: max(20px, safe-area-inset-right);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -151,6 +155,8 @@ body {
 /* Search Bar */
 .search-container {
   padding: 16px 20px;
+  padding-left: max(20px, safe-area-inset-left);
+  padding-right: max(20px, safe-area-inset-right);
   background: white;
   box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
@@ -175,6 +181,8 @@ body {
 /* Content */
 .content {
   padding: 20px;
+  padding-left: max(20px, safe-area-inset-left);
+  padding-right: max(20px, safe-area-inset-right);
   max-width: 600px;
   margin: 0 auto;
 }
@@ -477,14 +485,14 @@ body {
 .bottom-nav {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  left: safe-area-inset-left;
+  right: safe-area-inset-right;
   height: var(--bottom-nav-height);
   background: white;
   box-shadow: 0 -2px 8px rgba(0,0,0,0.1);
   display: flex;
   justify-content: space-around;
-  padding: 8px 0 calc(8px + env(safe-area-inset-bottom));
+  padding: 8px 0 calc(8px + safe-area-inset-bottom);
   z-index: 150;
 }
 
