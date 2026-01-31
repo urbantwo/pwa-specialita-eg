@@ -1,16 +1,14 @@
-
-const BASE_PATH = '/pwa-specialita-eg';
-const CACHE_NAME = 'specialita-eg-v3'; // Incrementa la versione
+const CACHE_NAME = 'specialita-eg-v2';
 const urlsToCache = [
-  './',
-  './index.html',
-  './styles.css',
-  './database.js',
-  './ui.js',
-  './app.js',
-  './manifest.json',
-  './icon-192.svg',
-  './icon-512.svg'
+  '/',
+  '/index.html',
+  '/styles.css',
+  '/database.js',
+  '/ui.js',
+  '/app.js',
+  '/manifest.json',
+  '/icon-192.svg',
+  '/icon-512.svg'
 ];
 
 
