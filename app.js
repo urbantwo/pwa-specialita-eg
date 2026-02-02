@@ -6,7 +6,7 @@
 
 // State Management
 window.AppState = {
-  currentView: 'specialita',
+  currentView: 'profilo',
   searchQuery: '',
   favorites: [],
   currentDetailId: null,
@@ -45,6 +45,24 @@ window.AppState = {
 
   saveFavorites: function() {
     localStorage.setItem('favorites', JSON.stringify(this.favorites));
+  },
+
+  getStats: function() {
+    const specialitaSalvate = database.specialita.filter(s => this.isFavorite(s.id)).length;
+    const brevettiSalvati = database.brevetti.filter(b => this.isFavorite(b.id)).length;
+    const totale = specialitaSalvate + brevettiSalvati;
+
+    return {
+      totale: totale,
+      specialita: specialitaSalvate,
+      brevetti: brevettiSalvati,
+      percentualeSpecialita: database.specialita.length > 0
+        ? Math.round((specialitaSalvate / database.specialita.length) * 100)
+        : 0,
+      percentualeBrevetti: database.brevetti.length > 0
+        ? Math.round((brevettiSalvati / database.brevetti.length) * 100)
+        : 0
+    };
   }
 };
 
@@ -139,15 +157,28 @@ window.App = {
     const container = document.getElementById('contentArea');
     let items = [];
 
-    if (AppState.currentView === 'specialita') {
-      items = database.specialita;
-    } else if (AppState.currentView === 'brevetti') {
-      items = database.brevetti;
-    } else if (AppState.currentView === 'preferiti') {
-      items = [
+    // Gestione vista profilo
+    if (AppState.currentView === 'profilo') {
+      const stats = AppState.getStats();
+      let favorites = [
         ...database.specialita.filter(s => AppState.isFavorite(s.id)),
         ...database.brevetti.filter(b => AppState.isFavorite(b.id))
       ];
+
+      // Filtra per ricerca se presente
+      if (AppState.searchQuery) {
+        favorites = favorites.filter(item =>
+          item.nome.toLowerCase().includes(AppState.searchQuery) ||
+          item.descrizione.toLowerCase().includes(AppState.searchQuery)
+        );
+      }
+
+      container.innerHTML = UI.renderProfiloView(stats, favorites);
+      return;
+    } else if (AppState.currentView === 'specialita') {
+      items = database.specialita;
+    } else if (AppState.currentView === 'brevetti') {
+      items = database.brevetti;
     }
 
     // Filtra per ricerca

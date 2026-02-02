@@ -58,6 +58,70 @@ window.UI = {
   },
 
   /**
+   * Renderizza la vista profilo con statistiche e preferiti
+   */
+  renderProfiloView: function(stats, favorites) {
+    return `
+      <div class="profilo-view">
+        <!-- Sezione Header Profilo -->
+        <div class="profilo-header">
+          <div class="profilo-avatar">👤</div>
+          <h2 class="profilo-title">Il mio percorso</h2>
+          <p class="profilo-subtitle">Esplora le tue competenze</p>
+        </div>
+
+        <!-- Sezione Statistiche -->
+        <div class="profilo-stats">
+          <div class="stat-card total">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-number">${stats.totale}</div>
+            <div class="stat-label">Competenze salvate</div>
+          </div>
+
+          <div class="stat-card specialita">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-number">${stats.specialita}</div>
+            <div class="stat-label">Specialità</div>
+            <div class="stat-progress">
+              <div class="stat-progress-bar" style="width: ${stats.percentualeSpecialita}%"></div>
+            </div>
+            <div class="stat-percentage">${stats.percentualeSpecialita}%</div>
+          </div>
+
+          <div class="stat-card brevetti">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-number">${stats.brevetti}</div>
+            <div class="stat-label">Brevetti</div>
+            <div class="stat-progress">
+              <div class="stat-progress-bar" style="width: ${stats.percentualeBrevetti}%"></div>
+            </div>
+            <div class="stat-percentage">${stats.percentualeBrevetti}%</div>
+          </div>
+        </div>
+
+        <!-- Sezione Preferiti -->
+        <div class="profilo-favorites">
+          <h3 class="profilo-section-title">Le tue competenze salvate</h3>
+          ${favorites.length > 0 ?
+            `<div class="cards-grid">${favorites.map(item => {
+              const isBrevetto = item.specialitaCollegate !== undefined;
+              return this.renderCard(item, isBrevetto);
+            }).join('')}</div>`
+            :
+            `<div class="empty-state">
+              <div class="empty-state-icon">💫</div>
+              <div class="empty-state-text">
+                Nessuna competenza salvata ancora.<br>
+                Inizia esplorando Specialità e Brevetti!
+              </div>
+            </div>`
+          }
+        </div>
+      </div>
+    `;
+  },
+
+  /**
    * Renderizza il contenuto della vista dettaglio
    */
   renderDetailContent: function(item, type) {
