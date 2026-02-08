@@ -2,19 +2,20 @@
   "name": "Specialità EG",
   "short_name": "Specialità EG",
   "description": "Esplora tutte le Specialità e i Brevetti della Branca E/G AGESCI",
-  "start_url": "/",
+  "start_url": "/pwa-specialita-eg/",
+  "scope": "/pwa-specialita-eg/",
   "display": "standalone",
   "background_color": "#E8DCC4",
   "theme_color": "#2C5530",
   "orientation": "portrait",
   "icons": [
     {
-      "src": "icon-256x256.png",
+      "src": "/pwa-specialita-eg/icon-256x256.png",
       "sizes": "256x256",
       "type": "image/png"
     },
     {
-      "src": "icon-512x512.png",
+      "src": "/pwa-specialita-eg/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

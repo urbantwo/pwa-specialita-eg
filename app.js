@@ -112,7 +112,7 @@ window.App = {
   },
 
   /**
-   * Setup PWA install
+   * Setup PWA install e aggiornamenti
    */
   setupPWA: function() {
     let deferredPrompt;
@@ -132,10 +132,138 @@ window.App = {
       }
     });
 
-    // Service Worker
+    // Service Worker con gestione aggiornamenti
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js');
+      let refreshing = false;
+
+      navigator.serviceWorker.register('/pwa-specialita-eg/sw.js')
+        .then((registration) => {
+          console.log('[App] Service Worker registrato');
+
+          // Controlla aggiornamenti ogni 30 minuti
+          setInterval(() => {
+            registration.update();
+          }, 30 * 60 * 1000);
+
+          // Rileva quando c'è un nuovo service worker in attesa
+          registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            console.log('[App] Nuovo Service Worker trovato');
+
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // C'è un aggiornamento pronto!
+                this.mostraNotificaAggiornamento();
+              }
+            });
+          });
+        })
+        .catch((err) => {
+          console.error('[App] Registrazione Service Worker fallita:', err);
+        });
+
+      // Ricarica automatica quando il nuovo SW prende il controllo
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
+      });
     }
+  },
+
+  /**
+   * Mostra notifica di aggiornamento disponibile
+   */
+  mostraNotificaAggiornamento: function() {
+    // Rimuovi eventuali banner precedenti
+    const oldBanner = document.getElementById('update-banner');
+    if (oldBanner) {
+      oldBanner.remove();
+    }
+
+    // Crea il banner di aggiornamento
+    const banner = document.createElement('div');
+    banner.id = 'update-banner';
+    banner.innerHTML = `
+      <div style="
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background: #2C5530;
+        color: white;
+        padding: 15px;
+        text-align: center;
+        z-index: 10000;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        animation: slideDown 0.3s ease-out;
+      ">
+        <p style="margin: 0 0 10px 0; font-size: 14px;">
+          <strong>🎉 Nuova versione disponibile!</strong>
+        </p>
+        <button id="reload-button" style="
+          background: #E8DCC4;
+          color: #2C5530;
+          border: none;
+          padding: 10px 24px;
+          border-radius: 20px;
+          font-weight: bold;
+          cursor: pointer;
+          margin-right: 10px;
+          font-size: 14px;
+        ">
+          Aggiorna ora
+        </button>
+        <button id="dismiss-button" style="
+          background: transparent;
+          color: white;
+          border: 1px solid white;
+          padding: 10px 24px;
+          border-radius: 20px;
+          cursor: pointer;
+          font-size: 14px;
+        ">
+          Dopo
+        </button>
+      </div>
+    `;
+
+    // Aggiungi animazione CSS
+    if (!document.getElementById('update-banner-styles')) {
+      const style = document.createElement('style');
+      style.id = 'update-banner-styles';
+      style.textContent = `
+        @keyframes slideDown {
+          from {
+            transform: translateY(-100%);
+            opacity: 0;
+          }
+          to {
+            transform: translateY(0);
+            opacity: 1;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    document.body.appendChild(banner);
+
+    // Gestione click sul pulsante "Aggiorna ora"
+    document.getElementById('reload-button').addEventListener('click', () => {
+      // Attiva il nuovo service worker e ricarica
+      navigator.serviceWorker.ready.then((registration) => {
+        if (registration.waiting) {
+          registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+        }
+      });
+    });
+
+    // Gestione click sul pulsante "Dopo"
+    document.getElementById('dismiss-button').addEventListener('click', () => {
+      banner.remove();
+    });
   },
 
   /**
