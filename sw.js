@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v2.1'; // Incrementa questo ad ogni deploy
+const CACHE_VERSION = 'v2.2'; // Incrementa questo ad ogni deploy
 const CACHE_NAME = `specialita-eg-${CACHE_VERSION}`;
 const BASE_PATH = '/pwa-specialita-eg';
 
